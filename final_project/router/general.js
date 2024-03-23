@@ -34,7 +34,7 @@ public_users.post("/register", (req,res) => {
 });
 
 // Get the book list available in the shop
-public_users.get('/', (req, res) {
+public_users.get('/', (req, res) => {
   //Write your code here
   res.send(JSON.stringify(books,null,4));
 });
@@ -54,12 +54,12 @@ public_users.get('/author/:author', (req, res) => {
     for(const [key, values] of Object.entries(books)){
         const book = Object.entries(values);
         for(let i = 0; i < book.length ; i++){
-            if(book[i][0] == 'author' && book[i][1] == req.params.author){
+            if(book[i][0] === 'author' && book[i][1] === req.params.author){
                 ans.push(books[key]);
             }
         }
     }
-    if(ans.length == 0){
+    if(ans.length === 0){
         return res.status(300).json({message: "Author not found"});
     }
     res.send(ans);
@@ -72,7 +72,7 @@ public_users.get('/title/:title', (req, res) => {
   for(const [key, values] of Object.entries(books)){
       const book = Object.entries(values);
       for(let i = 0; i < book.length ; i++){
-          if(book[i][0] == 'title' && book[i][1] == req.params.title){
+          if(book[i][0] === 'title' && book[i][1] === req.params.title){
               ans.push(books[key]);
           }
       }
@@ -136,7 +136,7 @@ public_users.get('/isbn/:isbn', (req, res) => {
 const getFromAuthor = (author) => {
   let output = [];
   return new Promise((resolve,reject)=>{
-    for (var isbn in books) {
+    for (let isbn in books) {
       let book_ = books[isbn];
       if (book_.author === author){
         output.push(book_);
@@ -162,7 +162,7 @@ public_users.get('/author/:author', (req, res) => {
 const getFromTitle = (title) => {
   let output = [];
   return new Promise((resolve,reject)=>{
-    for (var isbn in books) {
+    for (let isbn in books) {
       let book_ = books[isbn];
       if (book_.title === title){
         output.push(book_);
